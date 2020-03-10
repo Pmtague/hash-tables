@@ -3,95 +3,92 @@ import hashlib
 # '''
 # Linked List hash table key/value pair
 # '''
-class LinkedPair:
-    def __init__(self, key, value):
-        self.key = key
-        self.value = value
-        self.next = None
+
+
+class LinkedPair:		
+	def __init__(self, key, value):			
+		self.key = key			
+		self.value = value			
+		self.next = None
+
 
 class HashTable:
-    '''
-    A hash table that with `capacity` buckets
-    that accepts string keys
-    '''
-    def __init__(self, capacity):
-        self.capacity = capacity  # Number of buckets in the hash table
-        self.storage = [None] * capacity
+	'''
+	A hash table that with `capacity` buckets
+	that accepts string keys
+	'''
+	def __init__(self, capacity):
+		self.capacity = capacity  # Number of buckets in the hash table
+		self.storage = [None] * capacity
 
+	def _hash(self, key):
+		'''
+		Hash an arbitrary key and return an integer.
 
-    def _hash(self, key):
-        '''
-        Hash an arbitrary key and return an integer.
+		You may replace the Python hash with DJB2 as a stretch goal.
+		'''
 
-        You may replace the Python hash with DJB2 as a stretch goal.
-        '''
+		return hash(key)
 
-        return hash(key)
+	def _hash_djb2(self, key):
+		'''
+		Hash an arbitrary key using DJB2 hash
 
+		OPTIONAL STRETCH: Research and implement DJB2
+		'''
+		pass
 
-    def _hash_djb2(self, key):
-        '''
-        Hash an arbitrary key using DJB2 hash
+	def _hash_mod(self, key):
+		'''
+		Take an arbitrary key and return a valid integer index
+		within the storage capacity of the hash table.
+		'''
+		return self._hash(key) % self.capacity
 
-        OPTIONAL STRETCH: Research and implement DJB2
-        '''
-        pass
+	def insert(self, key, value):
+		'''
+		Store the value with the given key.
 
+		Hash collisions should be handled with Linked List Chaining.
 
-    def _hash_mod(self, key):
-        '''
-        Take an arbitrary key and return a valid integer index
-        within the storage capacity of the hash table.
-        '''
-        return self._hash(key) % self.capacity
-
-
-    def insert(self, key, value):
-        '''
-        Store the value with the given key.
-
-        Hash collisions should be handled with Linked List Chaining.
-
-        Fill this in.
-        '''
+		Fill this in.
+		'''
 		# Hash key
-        # Hashtable is full
+		self._hash_mod(key)
+		# Hashtable is full
+
 		# Collisions
-		self.insert(hashed_key, value)
+		
+		self.storage[hashed_key] = value
 
+	def remove(self, key):
+		'''
+		Remove the value stored with the given key.
 
+		Print a warning if the key is not found.
 
-    def remove(self, key):
-        '''
-        Remove the value stored with the given key.
+		Fill this in.
+		'''
+		pass
 
-        Print a warning if the key is not found.
+	def retrieve(self, key):
+		'''
+		Retrieve the value stored with the given key.
 
-        Fill this in.
-        '''
-        pass
+		Returns None if the key is not found.
 
+		Fill this in.
+		'''
+		pass
 
-    def retrieve(self, key):
-        '''
-        Retrieve the value stored with the given key.
+	def resize(self):
+		'''
+		Doubles the capacity of the hash table and
+		rehash all key/value pairs.
 
-        Returns None if the key is not found.
-
-        Fill this in.
-        '''
-        pass
-
-
-    def resize(self):
-        '''
-        Doubles the capacity of the hash table and
-        rehash all key/value pairs.
-
-        Fill this in.
-        '''
-        pass
-
+		Fill this in.
+		'''
+		pass
 
 
 if __name__ == "__main__":
