@@ -1,3 +1,5 @@
+import hashlib
+
 # '''
 # Linked List hash table key/value pair
 # '''
@@ -23,6 +25,7 @@ class HashTable:
 
         You may replace the Python hash with DJB2 as a stretch goal.
         '''
+
         return hash(key)
 
 
@@ -51,7 +54,10 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+		# Hash key
+        # Hashtable is full
+		# Collisions
+		self.insert(hashed_key, value)
 
 
 
