@@ -55,9 +55,11 @@ class HashTable:
 		'''
 		# Hash key
 		self._hash_mod(key)
-		# Hashtable is full
-
 		# Collisions
+		# Hashtable is full
+            # Double space possible? If no
+                # find another spot
+                # move the data to the new spot
 		
 		self.storage[hashed_key] = value
 
@@ -88,7 +90,7 @@ class HashTable:
 
 		Fill this in.
 		'''
-		pass
+		pass # Start here!!!
 
 
 if __name__ == "__main__":
