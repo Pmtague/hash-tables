@@ -20,7 +20,6 @@ class HashTable:
 	def __init__(self, capacity):
 		self.capacity = capacity  # Number of buckets in the hash table
 		self.storage = [None] * capacity
-		self.count = 0
 
 	def _hash(self, key):
 		'''
@@ -73,7 +72,21 @@ class HashTable:
 		if self.storage[index] == None:
 			print("Error: I can't delete something that doesn't exist.")
 		else:
-			self.storage[index] = None
+			if self.storage[index].key == key:
+				deleted_node = self.storage[index]
+				self.storage[index] = self.storage[index].next
+				return deleted_node
+			else:
+				current_node = self.storage[index]
+				prev_node = self.storage[index]
+				while current_node:
+					if current_node.key == key:
+						prev_node.next = current_node.next
+						return current_node
+					else:
+						prev_node = current_node
+						current_node = current_node.next
+
 
 	def retrieve(self, key):
 		'''
@@ -84,8 +97,15 @@ class HashTable:
 		Fill this in.
 		'''
 		index = self._hash_mod(key)
+		current_node = self.storage[index]
 
-		return self.storage[index]
+		while current_node:
+			if current_node.key == key:
+				return current_node.value
+			else:
+				current_node = current_node.next
+		
+		return None
 
 	def resize(self):
 		'''
@@ -100,7 +120,9 @@ class HashTable:
 		self.storage = [None] * self.capacity
 
 		for bucket_item in old_storage:
-			self.insert(bucket_item)
+			while bucket_item:
+				self.insert(bucket_item.key, bucket_item.value)
+				bucket_item = bucket_item.next
 
 
 if __name__ == "__main__":
