@@ -14,7 +14,7 @@ class LinkedPair:
 
 class HashTable:
 	'''
-	A hash table that with `capacity` buckets
+	A hash table with `capacity` buckets
 	that accepts string keys
 	'''
 	def __init__(self, capacity):
@@ -29,7 +29,7 @@ class HashTable:
 		You may replace the Python hash with DJB2 as a stretch goal.
 		'''
 
-		return hash(key)
+		return int(hashlib.sha256(b"key").hexdigest(), 16)
 
 	def _hash_djb2(self, key):
 		'''
@@ -55,14 +55,10 @@ class HashTable:
 		Fill this in.
 		'''
 		index = self._hash_mod(key)
+		node = LinkedPair(key, value)
 
-		if self.storage[index] is None:
-			self.storage[index] = LinkedPair(key, value)
-		else:
-			# if self.storage[index] == key:
-			print("Error: Don't be a fool, stay in school")
-			# else:
-				# pass
+		node.next = self.storage[index]
+		self.storage[index] = node
 
 	def remove(self, key):
 		'''
